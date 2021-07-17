@@ -47,8 +47,8 @@ char auth[] = "raecqd0xSlFbZTflcPCCypeMkZACP1BH";
 // Set password to "" for open networks.
 char ssid[] = "SRIRAM";
 char pass[] = "1234567890@123";
-
-int val;
+int pin = A0;
+int pin1=16;
 void setup()
 {
   // Debug console
@@ -56,24 +56,34 @@ void setup()
   
   Blynk.begin(auth, ssid, pass);
   
+  pinMode(pin,INPUT);
+  pinMode)pin1,OUTPUT);
+  
 }
 
 void loop()
 {
   Blynk.run();
+  float moisture_percent;
+  int sensor_anaglog;
+  sensor_analog=analogRead(pin);
+  moisture_percent=(100-((sensor_analog/1023.00)*100));
+  Serial.print("Moisture Percentage =");
+  Serial.print(moisure_percent);
+  
+  if(moisture_percent < 50){
+    digitalWrite(pin1,HIGH);
+    delay(1000);
+  }
+  else {
+    digitalWrite(pin1,LOW);
+    delay(1000);
+  }
+  
 }
 
-/*
- * pinMode(A0,INPUT);
-  pinMode(16,OUTPUT);
+
+ 
   
-  val=analogRead(A0);
-  if(val >900)
-  {
-    digitalWrite(16,1);
-    
-  }
-  else{
-    digitalWrite(16,0);
-  }
- */
+  
+ 
